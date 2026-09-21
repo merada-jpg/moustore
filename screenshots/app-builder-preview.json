@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "سوق الجزائر الرقمي",
+      "hasCanvas": false,
+      "bodyTextLen": 1195,
+      "bodyTextHash": "7c4695c50ada259c9fe3ede1b37cf43e7d252d98086ebe6196cf1b70371d007f",
+      "bodyTextPrefix": "تخطي إلى المحتوى سوق الجزائر الرقمي متاجر وروابط شراء مباشرة الر",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "سوق الجزائر الرقمي",
+      "hasCanvas": false,
+      "bodyTextLen": 1157,
+      "bodyTextHash": "7f37f36269579dbcf8be8125472fd95d24e5dbcbab649722b49902613879e9de",
+      "bodyTextPrefix": "تخطي إلى المحتوى سوق الجزائر الرقمي متاجر وروابط شراء مباشرة منص",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

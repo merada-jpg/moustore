@@ -1,0 +1,1 @@
+import{o as e}from"./useStore-CP8wJgJA.js";var t=e();function n({title:e,hint:n}){return(0,t.jsxs)(`div`,{className:`col-span-full rounded-xl border border-dashed border-border bg-surface px-6 py-16 text-center`,children:[(0,t.jsx)(`p`,{className:`font-medium text-ink`,children:e}),n?(0,t.jsx)(`p`,{className:`mt-1 text-sm text-muted`,children:n}):null]})}export{n as t};

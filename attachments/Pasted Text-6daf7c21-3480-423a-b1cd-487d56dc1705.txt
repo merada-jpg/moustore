@@ -1,0 +1,938 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق الجزائر الرقمي - منصة المتاجر الآمنة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="navigate('home')">
+                <div class="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-wide">سوق الجزائر الرقمي</h1>
+                    <p class="text-xs text-emerald-400">منصة التجارة الآمنة والمتعددة</p>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6 space-x-reverse text-sm font-medium">
+                <button onclick="navigate('home')" class="hover:text-emerald-400 transition">الرئيسية</button>
+                <button onclick="navigate('stores')" class="hover:text-emerald-400 transition">المتاجر المتاحة</button>
+                <button onclick="navigate('merchant')" class="bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded-xl transition text-white shadow-md">لوحة التاجر (إنشاء متجر)</button>
+                <button onclick="openContactModal()" class="hover:text-emerald-400 transition">اتصل بنا</button>
+            </nav>
+
+            <div class="md:hidden flex items-center">
+                <button onclick="toggleMobileMenu()" class="text-xl p-2 focus:outline-none" aria-label="فتح القائمة">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-slate-800 px-4 pt-2 pb-4 space-y-2 border-t border-slate-700">
+            <button onclick="navigate('home'); toggleMobileMenu();" class="block w-full text-right py-2 hover:text-emerald-400">الرئيسية</button>
+            <button onclick="navigate('stores'); toggleMobileMenu();" class="block w-full text-right py-2 hover:text-emerald-400">المتاجر المتاحة</button>
+            <button onclick="navigate('merchant'); toggleMobileMenu();" class="block w-full text-right py-2 bg-emerald-600 text-white rounded-lg px-3">لوحة التاجر</button>
+            <button onclick="openContactModal(); toggleMobileMenu();" class="block w-full text-right py-2 hover:text-emerald-400">اتصل بنا</button>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-6">
+
+        <!-- VIEW 1: HOME PAGE -->
+        <div id="view-home" class="space-y-8">
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl p-8 md:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between">
+                <div class="space-y-4 max-w-xl text-center md:text-right mb-6 md:mb-0">
+                    <span class="bg-emerald-500/30 text-emerald-100 text-xs px-3 py-1.5 rounded-full font-semibold uppercase tracking-wider">منصة التجارة الآمنة والسريعة</span>
+                    <h2 class="text-3xl md:text-5xl font-black leading-tight">أنشئ متجرك الخاص أو تسوق مباشرة بدون تسجيل حساب!</h2>
+                    <p class="text-emerald-100 text-sm md:text-base">كل زائر يمكنه تصفح سلع أي متجر أو الدخول عبر رابط مباشر للمنتج للشراء فوراً دون أي تعقيدات أو إنشاء حساب.</p>
+                    <div class="pt-2 flex flex-wrap justify-center md:justify-start gap-3">
+                        <button onclick="navigate('merchant')" class="bg-white text-emerald-800 font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-emerald-50 transition">افتح متجرك الآن</button>
+                        <button onclick="navigate('stores')" class="bg-emerald-800/60 border border-emerald-400 text-white font-bold px-6 py-3 rounded-xl hover:bg-emerald-800 transition">تصفح المتاجر</button>
+                    </div>
+                </div>
+                <div class="w-full md:w-96 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-white shadow-2xl">
+                    <h3 class="font-bold text-lg mb-3 flex items-center"><i class="fa-solid fa-headset ml-2 text-emerald-300"></i> التواصل والدعم السريع</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-center bg-white/10 p-3 rounded-xl">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xl ml-3"></i>
+                            <div>
+                                <span class="block text-xs text-slate-300">واتساب المساعد</span>
+                                <span class="font-bold">0775554695</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-white/10 p-3 rounded-xl">
+                            <i class="fa-solid fa-envelope text-teal-300 text-xl ml-3"></i>
+                            <div>
+                                <span class="block text-xs text-slate-300">البريد الإلكتروني</span>
+                                <span class="font-bold">merada35@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Products Grid -->
+            <div>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-slate-800 flex items-center">
+                        <i class="fa-solid fa-bolt text-amber-500 ml-2"></i> المنتجات المميزة (روابط مباشرة آمنة)
+                    </h3>
+                    <button onclick="navigate('stores')" class="text-emerald-600 font-bold hover:underline text-sm">عرض كل المتاجر &larr;</button>
+                </div>
+                <div id="featuredProductsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Dynamic Featured Products -->
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: STORES LIST -->
+        <div id="view-stores" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">المتاجر المتاحة</h2>
+                    <p class="text-sm text-slate-500">اختر أي متجر لتصفح سلعه الخاصة مباشرة والتواصل مع التاجر</p>
+                </div>
+                <div class="relative w-full md:w-72">
+                    <input type="text" id="storeSearchInput" oninput="filterStores()" placeholder="ابحث عن اسم المتجر..." class="w-full pr-10 pl-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                    <i class="fa-solid fa-search absolute top-3 right-3 text-slate-400"></i>
+                </div>
+            </div>
+            <div id="storesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Stores cards -->
+            </div>
+        </div>
+
+        <!-- VIEW 3: INDIVIDUAL STORE PAGE -->
+        <div id="view-store-detail" class="hidden space-y-6">
+            <button onclick="navigate('stores')" class="inline-flex items-center text-sm text-emerald-600 hover:text-emerald-700 font-bold bg-white px-4 py-2 rounded-xl shadow-sm border">
+                <i class="fa-solid fa-arrow-right ml-2"></i> العودة للمتاجر
+            </button>
+            <div id="storeDetailHeader" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <!-- Header info -->
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-slate-800 mb-4">سلع ومنتجات المتجر</h3>
+                <div id="storeProductsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Store products -->
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 4: MERCHANT DASHBOARD & STORE CREATION -->
+        <div id="view-merchant" class="hidden space-y-6 max-w-4xl mx-auto">
+            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-100">
+                <div class="border-b pb-4 mb-6 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">لوحة تحكم التاجر</h2>
+                        <p class="text-sm text-slate-500">أنشئ متجرك وأضف سلعك للبيع</p>
+                    </div>
+                    <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-bold">بوابة التجار</span>
+                </div>
+
+                <!-- Create/Login Form -->
+                <div id="merchantAuthSection" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-lg text-slate-700"><i class="fa-solid fa-shop text-emerald-600 ml-2"></i> إنشاء متجر تجريبي جديد أو إدارة متجرك</h3>
+                    <p class="text-xs text-slate-500">أدخل اسم المتجر ورقم هاتفك الصحيح (مثال: 0775554695).</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">اسم المتجر</label>
+                            <input type="text" id="merchantStoreName" placeholder="مثال: متجر الهواتف الذكية" class="w-full px-4 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">اسم التاجر / المالك</label>
+                            <input type="text" id="merchantOwnerName" placeholder="اسمك الكامل" class="w-full px-4 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">رقم الهاتف / واتساب</label>
+                            <input type="text" id="merchantPhone" placeholder="07xxxxxxxx" class="w-full px-4 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">البريد الإلكتروني (اختياري)</label>
+                            <input type="email" id="merchantEmail" placeholder="example@gmail.com" class="w-full px-4 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                    </div>
+                    <button onclick="createDemoStore()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-md transition mt-2">إنشاء المتجر والدخول للوحة التحكم</button>
+                </div>
+
+                <!-- Merchant Management Area -->
+                <div id="merchantDashboardArea" class="hidden space-y-6 pt-4">
+                    <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div>
+                            <h4 id="activeStoreTitle" class="font-bold text-emerald-900 text-lg"></h4>
+                            <p class="text-xs text-emerald-700">متجرك نشط ومعتمد للعرض المباشر.</p>
+                        </div>
+                        <button onclick="logoutMerchant()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl text-xs font-bold shadow">خروج من لوحة المتجر</button>
+                    </div>
+
+                    <!-- Add Product Form -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                        <h3 class="font-bold text-lg text-slate-700"><i class="fa-solid fa-circle-plus text-emerald-600 ml-2"></i> إضافة سلعة جديدة</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1">عنوان المنتج</label>
+                                <input type="text" id="productTitle" placeholder="اسم المنتج..." class="w-full px-4 py-2 border rounded-xl text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1">السعر (دج)</label>
+                                <input type="number" id="productPrice" min="1" max="100000000" placeholder="مثال: 4500" class="w-full px-4 py-2 border rounded-xl text-sm">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold text-slate-600 mb-1">رابط صورة المنتج (https://)</label>
+                                <input type="text" id="productImage" placeholder="https://images.unsplash.com/..." class="w-full px-4 py-2 border rounded-xl text-sm">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold text-slate-600 mb-1">وصف تفصيلي للسلعة</label>
+                                <textarea id="productDesc" rows="3" placeholder="تفاصيل المنتج ومميزاته..." class="w-full px-4 py-2 border rounded-xl text-sm"></textarea>
+                            </div>
+                        </div>
+                        <button onclick="addNewProduct()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl shadow transition">نشر المنتج في المتجر</button>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-4">سلع متجرك الحالية</h3>
+                        <div id="merchantProductsList" class="space-y-3">
+                            <!-- Merchant products list -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 5: DIRECT PRODUCT VIEW -->
+        <div id="view-product-direct" class="hidden max-w-3xl mx-auto space-y-6">
+            <button onclick="navigate('home')" class="inline-flex items-center text-sm text-emerald-600 hover:text-emerald-700 font-bold bg-white px-4 py-2 rounded-xl shadow-sm border">
+                <i class="fa-solid fa-arrow-right ml-2"></i> العودة للرئيسية
+            </button>
+            <div id="directProductCard" class="bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-100">
+                <!-- Direct product content -->
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 mt-auto py-8 border-t border-slate-800">
+        <div class="container mx-auto px-4 text-center space-y-4">
+            <p class="text-sm font-semibold text-white">منصة التجارة المتعددة للمتاجر والسلع الرقمية</p>
+            <div class="flex flex-wrap justify-center items-center gap-6 text-sm">
+                <div class="flex items-center space-x-2 space-x-reverse">
+                    <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i>
+                    <span>0775554695</span>
+                </div>
+                <div class="flex items-center space-x-2 space-x-reverse">
+                    <i class="fa-solid fa-envelope text-teal-400 text-lg"></i>
+                    <span>merada35@gmail.com</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-500 pt-4 border-t border-slate-800/60">جميع الحقوق محفوظة &copy; 2026 - نظام الروابط المباشرة الآمنة</p>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl relative">
+            <button onclick="closeContactModal()" class="absolute top-4 left-4 text-slate-400 hover:text-slate-600 text-lg" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="contactModalTitle" class="text-xl font-bold text-slate-800">اتصل بإدارة المنصة</h3>
+            <p class="text-xs text-slate-500">نحن هنا لمساعدتك في فتح متجرك أو الاستفسار عن السلع:</p>
+            <div class="space-y-3 pt-2">
+                <a href="https://wa.me/213775554695" target="_blank" rel="noopener" class="flex items-center p-3 bg-emerald-50 rounded-2xl hover:bg-emerald-100 transition text-emerald-800">
+                    <i class="fa-brands fa-whatsapp text-emerald-600 text-2xl ml-3"></i>
+                    <div>
+                        <span class="block text-xs text-slate-500">راسلنا عبر واتساب</span>
+                        <span class="font-bold">0775554695</span>
+                    </div>
+                </a>
+                <a href="mailto:merada35@gmail.com" class="flex items-center p-3 bg-teal-50 rounded-2xl hover:bg-teal-100 transition text-teal-800">
+                    <i class="fa-solid fa-envelope text-teal-600 text-2xl ml-3"></i>
+                    <div>
+                        <span class="block text-xs text-slate-500">راسلنا عبر البريد</span>
+                        <span class="font-bold">merada35@gmail.com</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 left-5 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 text-sm font-bold flex items-center space-x-2 space-x-reverse">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toastMsg">تم بنجاح!</span>
+    </div>
+
+    <script>
+        "use strict";
+
+        const STORAGE_KEYS = Object.freeze({
+            stores: 'platform_stores_v4',
+            session: 'merchant_session_v4'
+        });
+
+        // Default validated mock database
+        const defaultStores = [
+            {
+                id: 'store-1',
+                name: 'متجر الأناقة الجزائرية',
+                owner: 'أمين بلال',
+                phone: '213775554695',
+                email: 'merada35@gmail.com',
+                avatar: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=400&q=80',
+                status: 'approved',
+                active: true,
+                products: [
+                    { id: 'p1', title: 'ساعة يد فاخرة مقاومة للماء', price: 6500, image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80', desc: 'ساعة يد عصرية بضمان لمدة سنة مع توصيل لجميع الولايات.', stock: 10, status: 'approved', active: true },
+                    { id: 'p2', title: 'حقيبة ظهر رجالية جلدية', price: 4800, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80', desc: 'حقيبة عملية تناسب اللابتوب والاستخدام اليومي بجودة عالية جداً.', stock: 5, status: 'approved', active: true }
+                ]
+            },
+            {
+                id: 'store-2',
+                name: 'تكتيك للإلكترونيات',
+                owner: 'كمال الدين',
+                phone: '213660000000',
+                email: 'tech@store.dz',
+                avatar: 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=400&q=80',
+                status: 'approved',
+                active: true,
+                products: [
+                    { id: 'p3', title: 'سماعات بلوتوث لاسلكية فائقة النقاء', price: 3200, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80', desc: 'بطارية تدوم طويلاً مع عزل صوت ممتاز وصوت جهير قوي.', stock: 15, status: 'approved', active: true }
+                ]
+            }
+        ];
+
+        function readJson(key, fallback) {
+            try {
+                const raw = localStorage.getItem(key);
+                if (!raw) return fallback;
+                const parsed = JSON.parse(raw);
+                return parsed ?? fallback;
+            } catch {
+                return fallback;
+            }
+        }
+
+        function writeJson(key, value) {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+                return true;
+            } catch {
+                showToast('تعذر حفظ البيانات محلياً');
+                return false;
+            }
+        }
+
+        function normalizePhone(value) {
+            const digits = String(value || '').replace(/\D/g, '');
+            if (/^0[^1_5679]\d{8}$/.test(digits)) {
+                return `213${digits.slice(1)}`;
+            }
+            if (/^213[^1_5679]\d{8}$/.test(digits)) {
+                return digits;
+            }
+            return '';
+        }
+
+        function isSafeImageUrl(value) {
+            if (!value) return true;
+            try {
+                const url = new URL(value, window.location.origin);
+                return url.protocol === 'https:' || (url.origin === window.location.origin && url.protocol === 'http:');
+            } catch {
+                return false;
+            }
+        }
+
+        function normalizeProduct(p) {
+            const price = Number(p.price);
+            if (!p.id || !p.title || !Number.isInteger(price) || price <= 0) return null;
+            return {
+                id: String(p.id),
+                title: String(p.title).trim().slice(0, 120),
+                price,
+                image: isSafeImageUrl(p.image) ? p.image : '',
+                desc: String(p.desc || '').trim().slice(0, 1000),
+                stock: Number.isInteger(Number(p.stock)) ? Math.max(0, Number(p.stock)) : 1,
+                status: p.status === 'approved' ? 'approved' : 'pending',
+                active: p.active !== false
+            };
+        }
+
+        function normalizeStore(s) {
+            return {
+                id: String(s.id),
+                name: String(s.name || '').trim().slice(0, 80),
+                owner: String(s.owner || '').trim().slice(0, 80),
+                phone: normalizePhone(s.phone),
+                email: String(s.email || '').trim().slice(0, 120),
+                avatar: isSafeImageUrl(s.avatar) ? s.avatar : '',
+                status: s.status === 'approved' ? 'approved' : 'pending',
+                active: Boolean(s.active),
+                products: Array.isArray(s.products) ? s.products.map(normalizeProduct).filter(Boolean) : []
+            };
+        }
+
+        let dbStores = readJson(STORAGE_KEYS.stores, defaultStores).map(normalizeStore);
+        let sessionData = readJson(STORAGE_KEYS.session, null);
+        let currentMerchantStore = sessionData?.storeId ? dbStores.find(s => s.id === sessionData.storeId) || null : null;
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function getPublicStores() {
+            return dbStores.filter(s => s.active && s.status === 'approved');
+        }
+
+        function getPublicProducts(store) {
+            return store.products.filter(p => p.active && p.status === 'approved' && p.stock > 0);
+        }
+
+        function navigate(viewId, params = {}) {
+            ['home', 'stores', 'store-detail', 'merchant', 'product-direct'].forEach(v => {
+                document.getElementById(`view-${v}`).classList.add('hidden');
+            });
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const url = new URL(window.location.href);
+            url.search = '';
+
+            if (viewId === 'product-direct') {
+                url.searchParams.set('store', params.storeId);
+                url.searchParams.set('product', params.productId);
+            } else if (viewId === 'store-detail') {
+                url.searchParams.set('store', params.storeId);
+            }
+
+            history.pushState({ viewId, params }, '', url);
+
+            if (viewId === 'home') renderFeaturedProducts();
+            if (viewId === 'stores') renderStoresList();
+            if (viewId === 'store-detail' && params.storeId) renderStoreDetail(params.storeId);
+            if (viewId === 'merchant') checkMerchantState();
+            if (viewId === 'product-direct' && params.storeId) renderDirectProduct(params.storeId, params.productId);
+        }
+
+        window.addEventListener('popstate', () => {
+            routeFromUrl();
+        });
+
+        function routeFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const storeId = params.get('store');
+            const productId = params.get('product');
+
+            if (storeId && productId) {
+                navigate('product-direct', { storeId, productId });
+            } else if (storeId) {
+                navigate('store-detail', { storeId });
+            } else {
+                navigate('home');
+            }
+        }
+
+        function createProductCard(store, product) {
+            const card = document.createElement('div');
+            card.className = "bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition flex flex-col";
+
+            const imgBtn = document.createElement('button');
+            imgBtn.type = 'button';
+            imgBtn.className = "w-full h-48 overflow-hidden relative cursor-pointer text-right";
+            imgBtn.dataset.action = 'open-product';
+            imgBtn.dataset.storeId = store.id;
+            imgBtn.dataset.productId = product.id;
+
+            const img = document.createElement('img');
+            img.src = product.image || 'https://placehold.co/400x300/e2e8f0/64748b?text=صورة+المنتج';
+            img.alt = product.title;
+            img.className = "w-full h-full object-cover hover:scale-105 transition duration-300";
+            img.loading = "lazy";
+            img.onerror = () => { img.onerror = null; img.src = 'https://placehold.co/400x300/e2e8f0/64748b?text=صورة+المنتج'; };
+
+            const badge = document.createElement('span');
+            badge.className = "absolute top-3 right-3 bg-slate-900/80 text-white text-xs px-2.5 py-1 rounded-lg backdrop-blur-sm";
+            badge.textContent = store.name;
+
+            imgBtn.append(img, badge);
+
+            const body = document.createElement('div');
+            body.className = "p-4 flex flex-col flex-grow justify-between";
+
+            const info = document.createElement('div');
+            const title = document.createElement('h4');
+            title.className = "font-bold text-slate-800 mb-1 line-clamp-1 cursor-pointer hover:text-emerald-600";
+            title.textContent = product.title;
+            title.onclick = () => navigate('product-direct', { storeId: store.id, productId: product.id });
+
+            const desc = document.createElement('p');
+            desc.className = "text-xs text-slate-500 line-clamp-2 mb-3";
+            desc.textContent = product.desc;
+
+            info.append(title, desc);
+
+            const footer = document.createElement('div');
+            footer.className = "pt-3 border-t border-slate-100 flex items-center justify-between";
+
+            const price = document.createElement('span');
+            price.className = "text-emerald-600 font-black text-lg";
+            price.innerHTML = `${product.price.toLocaleString('ar-DZ')} <span class="text-xs font-normal text-slate-500">دج</span>`;
+
+            const linkBtn = document.createElement('button');
+            linkBtn.type = 'button';
+            linkBtn.className = "bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center";
+            linkBtn.innerHTML = '<i class="fa-solid fa-link ml-1"></i> رابط مباشر للشراء';
+            linkBtn.onclick = () => navigate('product-direct', { storeId: store.id, productId: product.id });
+
+            footer.append(price, linkBtn);
+            body.append(info, footer);
+            card.append(imgBtn, body);
+            return card;
+        }
+
+        function renderFeaturedProducts() {
+            const grid = document.getElementById('featuredProductsGrid');
+            grid.replaceChildren();
+            let count = 0;
+
+            for (const store of getPublicStores()) {
+                for (const product of getPublicProducts(store)) {
+                    grid.appendChild(createProductCard(store, product));
+                    count++;
+                }
+            }
+
+            if (count === 0) {
+                const empty = document.createElement('div');
+                empty.className = "col-span-full text-center py-12 text-slate-400";
+                empty.textContent = "لا توجد منتجات متاحة حالياً";
+                grid.appendChild(empty);
+            }
+        }
+
+        function renderStoresList() {
+            const grid = document.getElementById('storesGrid');
+            const query = document.getElementById('storeSearchInput').value.toLowerCase();
+            grid.replaceChildren();
+
+            const filtered = getPublicStores().filter(s => s.name.toLowerCase().includes(query) || s.owner.toLowerCase().includes(query));
+
+            if (filtered.length === 0) {
+                const empty = document.createElement('div');
+                empty.className = "col-span-full text-center py-12 text-slate-400";
+                empty.textContent = "لا توجد متاجر تطابق بحثك";
+                grid.appendChild(empty);
+                return;
+            }
+
+            filtered.forEach(store => {
+                const productsCount = getPublicProducts(store).length;
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md transition";
+
+                const topDiv = document.createElement('div');
+                topDiv.className = "flex items-center space-x-4 space-x-reverse mb-4";
+
+                const avatar = document.createElement('img');
+                avatar.src = store.avatar || 'https://placehold.co/100/e2e8f0/64748b?text=متجر';
+                avatar.alt = store.name;
+                avatar.className = "w-16 h-16 rounded-2xl object-cover shadow border";
+                avatar.onerror = () => { avatar.onerror = null; avatar.src = 'https://placehold.co/100/e2e8f0/64748b?text=متجر'; };
+
+                const details = document.createElement('div');
+                const storeTitle = document.createElement('h3');
+                storeTitle.className = "font-bold text-lg text-slate-800";
+                storeTitle.textContent = store.name;
+
+                const owner = document.createElement('p');
+                owner.className = "text-xs text-slate-500";
+                owner.textContent = `التاجر: ${store.owner}`;
+
+                const badge = document.createElement('span');
+                badge.className = "inline-block mt-1 bg-emerald-50 text-emerald-700 text-xs px-2.5 py-0.5 rounded-full font-semibold";
+                badge.textContent = `${productsCount} منتجات متاحة`;
+
+                details.append(storeTitle, owner, badge);
+                topDiv.append(avatar, details);
+
+                const footer = document.createElement('div');
+                footer.className = "pt-4 border-t border-slate-100 flex justify-end items-center";
+
+                const enterBtn = document.createElement('button');
+                enterBtn.type = 'button';
+                enterBtn.className = "bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl text-xs font-bold shadow transition";
+                enterBtn.textContent = "دخول المتجر";
+                enterBtn.onclick = () => navigate('store-detail', { storeId: store.id });
+
+                footer.appendChild(enterBtn);
+                card.append(topDiv, footer);
+                grid.appendChild(card);
+            });
+        }
+
+        function filterStores() {
+            renderStoresList();
+        }
+
+        function renderStoreDetail(storeId) {
+            const store = getPublicStores().find(s => s.id === storeId);
+            if (!store) {
+                navigate('stores');
+                return;
+            }
+
+            const header = document.getElementById('storeDetailHeader');
+            header.replaceChildren();
+
+            const leftDiv = document.createElement('div');
+            leftDiv.className = "flex items-center space-x-4 space-x-reverse";
+
+            const avatar = document.createElement('img');
+            avatar.src = store.avatar || 'https://placehold.co/100/e2e8f0/64748b?text=متجر';
+            avatar.className = "w-20 h-20 rounded-2xl object-cover shadow border";
+
+            const info = document.createElement('div');
+            const certified = document.createElement('span');
+            certified.className = "bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold";
+            certified.textContent = "متجر معتمد";
+
+            const name = document.createElement('h2');
+            name.className = "text-2xl font-bold text-slate-800 mt-1";
+            name.textContent = store.name;
+
+            const sub = document.createElement('p');
+            sub.className = "text-xs text-slate-500 mt-0.5";
+            sub.textContent = `مالك المتجر: ${store.owner}`;
+
+            info.append(certified, name, sub);
+            leftDiv.append(avatar, info);
+
+            const rightDiv = document.createElement('div');
+            const waBtn = document.createElement('a');
+            waBtn.href = `https://wa.me/${store.phone}`;
+            waBtn.target = "_blank";
+            waBtn.rel = "noopener";
+            waBtn.className = "bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center shadow";
+            waBtn.innerHTML = '<i class="fa-brands fa-whatsapp text-base ml-1"></i> مراسلة التاجر';
+            rightDiv.appendChild(waBtn);
+
+            header.append(leftDiv, rightDiv);
+
+            const grid = document.getElementById('storeProductsGrid');
+            grid.replaceChildren();
+            const products = getPublicProducts(store);
+
+            if (products.length === 0) {
+                const empty = document.createElement('div');
+                empty.className = "col-span-full text-center py-12 text-slate-400";
+                empty.textContent = "لا توجد سلع مضافة في هذا المتجر حالياً";
+                grid.appendChild(empty);
+                return;
+            }
+
+            products.forEach(prod => {
+                grid.appendChild(createProductCard(store, prod));
+            });
+        }
+
+        function renderDirectProduct(storeId, productId) {
+            const store = getPublicStores().find(s => s.id === storeId);
+            if (!store) {
+                navigate('home');
+                return;
+            }
+            const prod = getPublicProducts(store).find(p => p.id === productId);
+            if (!prod) {
+                navigate('home');
+                return;
+            }
+
+            const container = document.getElementById('directProductCard');
+            container.replaceChildren();
+
+            const wrapper = document.createElement('div');
+            wrapper.className = "space-y-6";
+
+            const topBar = document.createElement('div');
+            topBar.className = "flex justify-between items-center bg-slate-50 p-4 rounded-2xl border";
+            topBar.innerHTML = `
+                <div>
+                    <span class="text-xs text-slate-400">متجر التاجر:</span>
+                    <h4 class="font-bold text-slate-800 cursor-pointer text-emerald-600 hover:underline">${store.name}</h4>
+                </div>
+                <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold"><i class="fa-solid fa-bolt ml-1"></i> صفحة منتج آمنة</span>
+            `;
+            topBar.querySelector('h4').onclick = () => navigate('store-detail', { storeId: store.id });
+
+            const grid = document.createElement('div');
+            grid.className = "grid grid-cols-1 md:grid-cols-2 gap-6";
+
+            const imgWrapper = document.createElement('div');
+            imgWrapper.className = "rounded-2xl overflow-hidden shadow border h-72 md:h-96";
+            const img = document.createElement('img');
+            img.src = prod.image || 'https://placehold.co/600x600/e2e8f0/64748b?text=صورة+المنتج';
+            img.className = "w-full h-full object-cover";
+            imgWrapper.appendChild(img);
+
+            const details = document.createElement('div');
+            details.className = "flex flex-col justify-between space-y-4";
+
+            const infoPart = document.createElement('div');
+            const h1 = document.createElement('h1');
+            h1.className = "text-2xl md:text-3xl font-black text-slate-900 mb-2";
+            h1.textContent = prod.title;
+
+            const priceDiv = document.createElement('div');
+            priceDiv.className = "text-3xl font-black text-emerald-600 mb-4";
+            priceDiv.innerHTML = `${prod.price.toLocaleString('ar-DZ')} <span class="text-sm font-normal text-slate-500">دينار جزائري</span>`;
+
+            const descP = document.createElement('p');
+            descP.className = "text-sm text-slate-600 leading-relaxed mb-6";
+            descP.textContent = prod.desc;
+
+            infoPart.append(h1, priceDiv, descP);
+
+            const orderBox = document.createElement('div');
+            orderBox.className = "bg-slate-50 p-4 rounded-2xl border space-y-3";
+            orderBox.innerHTML = `
+                <h4 class="font-bold text-xs text-slate-500 uppercase tracking-wider">هل تريد شراء هذا المنتج فوراً؟</h4>
+                <div class="flex gap-3">
+                    <a href="https://wa.me/${store.phone}?text=أريد%20طلب%20هذا%20المنتج:%20${encodeURIComponent(prod.title)}" target="_blank" rel="noopener" class="flex-grow bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl text-center shadow transition flex items-center justify-center">
+                        <i class="fa-brands fa-whatsapp text-lg ml-2"></i> اطلب عبر واتساب فوراً
+                    </a>
+                </div>
+                <p class="text-[11px] text-slate-400 text-center"><i class="fa-solid fa-shield-check text-emerald-600"></i> يتم تحويلك مباشرة للتاجر دون الحاجة لإنشاء حساب.</p>
+            `;
+
+            details.append(infoPart, orderBox);
+            grid.append(imgWrapper, details);
+            wrapper.append(topBar, grid);
+            container.appendChild(wrapper);
+        }
+
+        function checkMerchantState() {
+            const authSec = document.getElementById('merchantAuthSection');
+            const dashArea = document.getElementById('merchantDashboardArea');
+
+            if (currentMerchantStore) {
+                authSec.classList.add('hidden');
+                dashArea.classList.remove('hidden');
+                document.getElementById('activeStoreTitle').innerText = `أهلاً بك، متجرك النشط: ${currentMerchantStore.name}`;
+                renderMerchantProducts();
+            } else {
+                authSec.classList.remove('hidden');
+                dashArea.classList.add('hidden');
+            }
+        }
+
+        function createDemoStore() {
+            const storeName = document.getElementById('merchantStoreName').value.trim();
+            const owner = document.getElementById('merchantOwnerName').value.trim();
+            const rawPhone = document.getElementById('merchantPhone').value.trim();
+            const email = document.getElementById('merchantEmail').value.trim();
+
+            const phone = normalizePhone(rawPhone);
+
+            if (storeName.length < 3 || owner.length < 3) {
+                showToast('يرجى ملء اسم المتجر واسم المالك بشكل صحيح');
+                return;
+            }
+
+            if (!phone) {
+                showToast('أدخل رقم هاتف جزائري صحيح (مثال: 0775554695)');
+                return;
+            }
+
+            const newStore = {
+                id: 'store-' + crypto.randomUUID(),
+                name: storeName,
+                owner: owner,
+                phone: phone,
+                email: email || 'merada35@gmail.com',
+                avatar: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=400&q=80',
+                status: 'approved',
+                active: true,
+                products: []
+            };
+
+            dbStores.push(newStore);
+            currentMerchantStore = newStore;
+
+            writeJson(STORAGE_KEYS.stores, dbStores);
+            writeJson(STORAGE_KEYS.session, { storeId: newStore.id });
+
+            showToast('تم إنشاء المتجر بنجاح وتفعيل لوحة التحكم!');
+            checkMerchantState();
+        }
+
+        function logoutMerchant() {
+            currentMerchantStore = null;
+            localStorage.removeItem(STORAGE_KEYS.session);
+            checkMerchantState();
+            showToast('تم الخروج من لوحة التاجر');
+        }
+
+        function addNewProduct() {
+            if (!currentMerchantStore) return;
+
+            const title = document.getElementById('productTitle').value.trim();
+            const price = Number(document.getElementById('productPrice').value);
+            const image = document.getElementById('productImage').value.trim();
+            const desc = document.getElementById('productDesc').value.trim();
+
+            if (title.length < 3 || !Number.isInteger(price) || price <= 0) {
+                showToast('يرجى إدخال عنوان صالح للمنتج وسعر صحيح');
+                return;
+            }
+
+            if (image && !isSafeImageUrl(image)) {
+                showToast('رابط الصورة غير صالح');
+                return;
+            }
+
+            const newProd = {
+                id: 'p-' + crypto.randomUUID(),
+                title: title,
+                price: price,
+                image: image || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80',
+                desc: desc || 'منتج جديد عالي الجودة متوفر للطلب الفوري.',
+                stock: 10,
+                status: 'approved',
+                active: true
+            };
+
+            const store = dbStores.find(s => s.id === currentMerchantStore.id);
+            if (store) {
+                store.products.unshift(newProd);
+                currentMerchantStore = store;
+                writeJson(STORAGE_KEYS.stores, dbStores);
+
+                document.getElementById('productTitle').value = '';
+                document.getElementById('productPrice').value = '';
+                document.getElementById('productImage').value = '';
+                document.getElementById('productDesc').value = '';
+
+                showToast('تم نشر السلعة بنجاح وإتاحتها للزبائن!');
+                renderMerchantProducts();
+            }
+        }
+
+        function renderMerchantProducts() {
+            const list = document.getElementById('merchantProductsList');
+            const store = dbStores.find(s => s.id === currentMerchantStore?.id);
+            list.replaceChildren();
+
+            if (!store || store.products.length === 0) {
+                const empty = document.createElement('p');
+                empty.className = "text-xs text-slate-400 text-center py-6";
+                empty.textContent = "لم تقم بإضافة أي سلع بعد";
+                list.appendChild(empty);
+                return;
+            }
+
+            store.products.forEach(prod => {
+                const item = document.createElement('div');
+                item.className = "bg-white p-4 rounded-2xl border flex items-center justify-between gap-4";
+
+                const left = document.createElement('div');
+                left.className = "flex items-center space-x-3 space-x-reverse";
+
+                const img = document.createElement('img');
+                img.src = prod.image || 'https://placehold.co/100/e2e8f0/64748b?text=سلعة';
+                img.className = "w-12 h-12 rounded-xl object-cover";
+
+                const info = document.createElement('div');
+                const title = document.createElement('h5');
+                title.className = "font-bold text-slate-800 text-sm";
+                title.textContent = prod.title;
+
+                const price = document.createElement('span');
+                price.className = "text-xs text-emerald-600 font-bold";
+                price.textContent = `${prod.price.toLocaleString('ar-DZ')} دج`;
+
+                info.append(title, price);
+                left.append(img, info);
+
+                const right = document.createElement('div');
+                right.className = "flex items-center gap-2";
+
+                const viewBtn = document.createElement('button');
+                viewBtn.type = 'button';
+                viewBtn.className = "bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition";
+                viewBtn.innerHTML = '<i class="fa-solid fa-eye ml-1"></i> معاينة';
+                viewBtn.onclick = () => navigate('product-direct', { storeId: store.id, productId: prod.id });
+
+                const delBtn = document.createElement('button');
+                delBtn.type = 'button';
+                delBtn.className = "text-red-500 hover:bg-red-50 p-2 rounded-xl text-xs transition";
+                delBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+                delBtn.onclick = () => deleteProduct(prod.id);
+
+                right.append(viewBtn, delBtn);
+                item.append(left, right);
+                list.appendChild(item);
+            });
+        }
+
+        function deleteProduct(prodId) {
+            const store = dbStores.find(s => s.id === currentMerchantStore?.id);
+            if (store) {
+                store.products = store.products.filter(p => p.id !== prodId);
+                currentMerchantStore = store;
+                writeJson(STORAGE_KEYS.stores, dbStores);
+                renderMerchantProducts();
+                showToast('تم حذف المنتج بنجاح');
+            }
+        }
+
+        function openContactModal() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeContactModal() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        document.addEventListener('click', event => {
+            const target = event.target.closest('[data-action]');
+            if (!target) return;
+            if (target.dataset.action === 'open-product') {
+                navigate('product-direct', { storeId: target.dataset.storeId, productId: target.dataset.productId });
+            }
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                closeContactModal();
+            }
+        });
+
+        window.onload = function() {
+            routeFromUrl();
+        }
+    </script>
+</body>
+</html>
+```
